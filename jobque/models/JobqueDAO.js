@@ -1,4 +1,4 @@
-import db from './db.js';
+import {pool} from './db.js';
 
 //회원 관리
 export const createMember = async(userid, pwd, name) => {
