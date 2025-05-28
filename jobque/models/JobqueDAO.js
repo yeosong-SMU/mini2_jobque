@@ -1,4 +1,4 @@
-import {pool} from './db.js';
+import db from './db.js';
 
 export const createMember = async(userid, pwd, name) => {
     return db.execute('insert into jq_users (userid, pwd, name) values (?, sha2(?, 256), ?)', [userid, pwd, name]);
@@ -28,3 +28,8 @@ export const findByUserId = async (userid) => {
 //     const sql = 'delete from member where userid = ?';
 //     return db.execute(sql, [userid]);
 // };
+
+export const findAll = async () => {
+    const [rows] = await db.execute('SELECT * FROM jq_users');
+    return rows;
+};

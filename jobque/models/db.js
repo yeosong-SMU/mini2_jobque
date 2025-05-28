@@ -7,3 +7,5 @@ export const pool = createPool({
     port: 3306,
     database: "web",
 });
+
+export default pool;
