@@ -1,7 +1,8 @@
 import {Router} from 'express';
-import { getRegister, postRegister, getLogin, postLogin, logout, list, main, update, remove } from '../controller/usersController.js';
+import { getRegister, postRegister, getLogin, postLogin, logout, list, main, update, remove } from '../controllers/usersController.js';
 const router = Router();
 
+router.get("/login", usersController.loginPage);
 router.get('/register', getRegister);
 router.post('/register', postRegister);
 router.get('/login', getLogin);    //로그인 화면으로
