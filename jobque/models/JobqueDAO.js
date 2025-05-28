@@ -1,7 +1,7 @@
 import db from './db.js';
 
 export const createMember = async(userid, pwd, name) => {
-    return db.execute('insert into jq_users (userid, pwd, name) values (?, sha2(?, 256), ?)', [userid, pwd, name);
+    return db.execute('insert into jq_users (userid, pwd, name) values (?, sha2(?, 256), ?)', [userid, pwd, name]);
 };
 
 export const loginMember = async(userid, pwd) => {

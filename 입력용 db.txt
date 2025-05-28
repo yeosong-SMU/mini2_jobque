@@ -1,0 +1,49 @@
+cd c:/nodejs
+express jobque
+cd jobque
+npm install
+npm install mysql2
+npm install ejs
+npm install express-session
+npm start
+
+mysql -u user -p1234
+use web;
+
+create table jq_users (
+id int auto_increment primary key,
+userid varchar(50) not null unique,
+pwd varchar(100) not null,
+name varchar(100) not null
+);
+create table jq_board (
+id int auto_increment primary key,
+users_id int not null,
+category enum('기본', '인성', '프론트엔드', '백엔드') default '기본',
+ques text not null,
+basic boolean default false,
+post_date datetime default current_timestamp,
+foreign key (users_id) references jq_users(id) on delete cascade
+);
+create table jq_comment (
+id int auto_increment primary key,
+users_id int not null,
+board_id int not null,
+comment text not null,
+post_date datetime default current_timestamp,
+foreign key (users_id) references jq_users(id) on delete cascade,
+foreign key (board_id) references jq_board(id) on delete cascade
+);
+
+insert into jq_users (userid, pwd, name) values
+('admin', sha2('1234', 256), '관리자'),
+('kim', sha2('1234', 256), '김철수'),
+('park', sha2('1234', 256), '박철수');
+
+insert into jq_board (users_id, category, ques, basic, post_date) values
+(1, '기본', '지원동기가 무엇입니까?', true, null),
+(1, '기본', '본인의 장단점이 무엇이라고 생각합니까?', true, null);
+
+insert into jq_comment (users_id, board_id, comment) values
+(2, 1, '저는 어쩌구 지원 어쩌구'),
+(3, 1, '박철수는 어쩌구 지원 어쩌구');
