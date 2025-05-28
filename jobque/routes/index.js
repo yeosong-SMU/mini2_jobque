@@ -1,16 +1,14 @@
 import {Router} from 'express';
-import { getRegister, postRegister, getLogin, postLogin, logout, main,
-    //  update, remove 
-    } from '../controllers/usersController.js';
+import { getRegister, postRegister, getLogin, postLogin, logout } from '../controllers/usersController.js';
 const router = Router();
 
 router.get("/login", getLogin);
 router.get('/register', getRegister);
 router.post('/register', postRegister);
-router.get('/login', getLogin);    //로그인 화면으로
+//router.get('/login', getLogin);    //로그인 화면으로
 router.post('/login', postLogin);    //로그인 체크 처리
 router.get('/logout', logout);
-router.get('/main', main);
+//router.get('/main', main);
 // router.post('/update', update);
 // router.post('/remove', remove);
 
