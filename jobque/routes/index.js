@@ -5,8 +5,8 @@ import { getRegister, postRegister, getLogin, postLogin, logout,
 const router = Router();
 
 router.get("/login", getLogin);
-// router.get('/register', getRegister);
-// router.post('/register', postRegister);
+router.get('/register', getRegister);
+router.post('/register', postRegister);
 // router.get('/login', getLogin);    //로그인 화면으로
 // router.post('/login', postLogin);    //로그인 체크 처리
 // router.get('/logout', logout);
