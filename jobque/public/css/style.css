@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+.answer-section {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed #ccc;
+}
+
+.answer-text {
+  font-size: 15px;
+  color: #333;
+}
+
+.no-answer {
+  font-size: 14px;
+  color: #999;
+  font-style: italic;
+}
