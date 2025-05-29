@@ -1,23 +1,24 @@
-import { listQues, detailQues, listComment, createQues, updateQues, removeQues } from "../models/JobqueDAO.js";
+import { findByUserId, listQues, detailQues, listComment, createQues, updateQues, removeQues } from "../models/JobqueDAO.js";
 
 // 로그인 후 나의 페이지
 export const main = async (req, res) => {
     //user의 id를 받아서 그걸로 listQues 출력
 
-    // if(!req.session.userid) {
-    //     res.redirect('/jopque/login?msg=authority');
-    // }
+    if(!req.session.userid) {
+        res.redirect('/jopque/login');
+    }
 
     // const list = await listQues(req.session.users_id);
 
     // res.render("main", {list: list});
-    
-
-    const member = req.session.userid
-        ? await findByUserId(req.session.userid)
-        : null;
-    
+    const member = await findByUserId(req.session.userid);
     res.render('main', {member: member, session: req.session});
+
+    // const member = req.session.userid
+    //     ? await findByUserId(req.session.userid)
+    //     : null;
+    
+    // res.render('main', {member: member, session: req.session});
 };
 
 // 질문 생성
