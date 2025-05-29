@@ -41,6 +41,10 @@ export const logout = (req, res) => {
     });
 };
 
+export const showPopup = (req, res) => {
+  res.render('popup'); 
+};
+
 // export const list = async (req, res) => {
 //     if(!req.session.userid || req.session.user_type !== 'admin') {
 //         res.redirect('/member/login?msg=authority');

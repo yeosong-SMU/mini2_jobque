@@ -35,11 +35,11 @@ export const listQues = async (users_id) => {
     return pool.execute('select * from jq_board where users_id = ?', [users_id]);
 };
 
-export const detailQues = async (users_id, board_id) => {
-    return pool.execute('select * from jq_board where users_id = ? and id = ?', [users_id, board_id]);
+export const detailQues = async (board_id) => {
+    return pool.execute('select * from jq_board where id = ?', [board_id]);
 };
 
-export const detailComment = async (users_id, board_id) => {
+export const listComment = async (users_id, board_id) => {
     return pool.execute('select * from jq_comment where users_id = ? and board_id = ?', [users_id, board_id]);
 };
 
