@@ -39,9 +39,6 @@ export const logout = (req, res) => {
     req.session.destroy(() => {
         res.redirect('/jopque/login?msg=logout');
     });
-<<<<<<< HEAD
-};
-=======
 };
 
 // export const list = async (req, res) => {
@@ -52,17 +49,17 @@ export const logout = (req, res) => {
 //     res.render('list', {members});
 // };
 
-export const main = async (req, res) => {
-    // 테스트하기 위해 임시로 주석 처리할게요
-    // if(!req.session.userid) {
-    //     res.redirect('/jopque/login?msg=authority');
-    // }
-    const member = req.session.userid
-        ? await findByUserId(req.session.userid)
-        : null;
+// export const main = async (req, res) => {
+//     // 테스트하기 위해 임시로 주석 처리할게요
+//     // if(!req.session.userid) {
+//     //     res.redirect('/jopque/login?msg=authority');
+//     // }
+//     const member = req.session.userid
+//         ? await findByUserId(req.session.userid)
+//         : null;
 
-    res.render('main', { member: member, session: req.session });
-};
+//     res.render('main', { member: member, session: req.session });
+// };
 
 // export const updateBoard = async (req, res) => {
 //     const {users_id} = req.params;
@@ -82,4 +79,3 @@ export const main = async (req, res) => {
 //     await removeMember(userid);
 //     res.redirect('/member/list');
 // };
->>>>>>> d15cef27f21611ee98248e7da043e8592fe84a3b

@@ -10,16 +10,21 @@ import { listQues, detailQues, createQues, updateQues, removeQues } from "../mod
 
 // 로그인 후 나의 페이지
 export const main = async (req, res) => {
-    if(!req.session.userid) {
-        res.redirect('/jopque/login?msg=authority');
-    }
+    // if(!req.session.userid) {
+    //     res.redirect('/jopque/login?msg=authority');
+    // }
 
-    const list = await listQues(req.session.users_id);
+    // const list = await listQues(req.session.users_id);
 
-    res.render("main", {list: list});
+    // res.render("main", {list: list});
     //user의 id를 받아서 그걸로 listQues 출력
     //const member = await findByUserId(req.session.userid);
-    //res.render('main', {member: member, session: req.session});
+
+    const member = req.session.userid
+        ? await findByUserId(req.session.userid)
+        : null;
+    
+    res.render('main', {member: member, session: req.session});
 };
 
 // 질문 생성
