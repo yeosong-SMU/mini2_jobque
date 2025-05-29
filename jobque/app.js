@@ -29,13 +29,13 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(routes);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/jopque', jopqueRouter);   //공통적인 utl pattern
+app.use('/jobque', jobqueRouter);   //공통적인 utl pattern
 
 
 
 
 app.get('/', (req, res) => {
-  res.redirect('/jopque/login');
+  res.redirect('/jobque/login');
 });
 
 

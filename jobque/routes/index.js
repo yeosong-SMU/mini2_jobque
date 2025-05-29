@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import { getRegister, postRegister, getLogin, postLogin, logout, showPopup } from '../controllers/usersController.js';
-import { main, insertQues } from '../controllers/quesController.js';
+import { main } from '../controllers/quesController.js';
 
 
 // import { getRegister, postRegister, getLogin, postLogin, main
