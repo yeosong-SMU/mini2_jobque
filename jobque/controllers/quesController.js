@@ -42,7 +42,7 @@ export const insertQues = async (req, res) => {
 
 
 // 질문 클릭
-export const detailQues = async (req, res) => {
+export const clickQues = async (req, res) => {
     const {board_id} = req.body;
 
     res.redirect("/de")
