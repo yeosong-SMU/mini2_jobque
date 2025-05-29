@@ -14,15 +14,6 @@ app.set("port", process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));  //views 디렉토리
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: false }));
-//app.use(routes);
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/jopque', jopqueRouter);   //공통적인 utl pattern
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 app.use(
   session({
     secret: 'secret-key',
@@ -30,6 +21,17 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(express.urlencoded({ extended: false }));
+//app.use(routes);
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/jopque', jopqueRouter);   //공통적인 utl pattern
+
+
 
 
 app.get('/', (req, res) => {

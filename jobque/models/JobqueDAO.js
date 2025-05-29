@@ -1,4 +1,4 @@
-import { pool } from './db.js';
+import {pool} from './db.js';
 
 // 회원 관리
 export const createMember = async (userid, pwd, name) => {
@@ -27,6 +27,7 @@ export const findByUserId = async (userid) => {
 
 // export const removeMember = async (userid) => {
 //     const sql = 'delete from member where userid = ?';
+<<<<<<< HEAD
 //     return pool.execute(sql, [userid]);
 // };
 
@@ -69,3 +70,7 @@ export const removeQues = async (board_id) => {
 export const removeComment = async (comment_id) => {
     return pool.execute('delete from jq_comment where id = ?', [comment_id]);
 };
+=======
+//     return db.execute(sql, [userid]);
+// };
+>>>>>>> d15cef27f21611ee98248e7da043e8592fe84a3b
