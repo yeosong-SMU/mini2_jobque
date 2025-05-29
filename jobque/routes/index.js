@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { getRegister, postRegister, getLogin, postLogin, logout } from '../controllers/usersController.js';
+import { getRegister, postRegister, getLogin, postLogin, logout, showPopup } from '../controllers/usersController.js';
 import { main, insertQues } from '../controllers/quesController.js';
 
 
@@ -17,6 +17,7 @@ router.get('/logout', logout);
 //router.get('/main', main);
 // router.get('/logout', logout);
 router.get('/main', main);
+router.get('/popup', showPopup);
 // router.post('/update', update);
 // // router.post('/remove', remove);
 
