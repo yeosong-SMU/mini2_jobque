@@ -14,5 +14,16 @@
     <p>이곳은 로그인 없이 접근 가능한 메인 페이지입니다.</p>
     <p>나중에는 세션이 있어야만 접근 가능하도록 수정할 거예요.</p>
   </main>
+  
+  <script>
+  // 페이지가 로드되면 쿠키를 확인하고 팝업 띄움
+  window.onload = function () {
+    const hidePopup = document.cookie.includes('hidePopup=true');
+    if (!hidePopup) {
+      window.open('/jopque/popup', '채용 팝업', 'width=400,height=300');
+    }
+  };
+</script>
+
 </body>
 </html>
