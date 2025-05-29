@@ -7,7 +7,7 @@ export const getRegister = (req, res) => {
 export const postRegister = async (req, res) => {
     const { userid, pwd, name } = req.body;
     await createMember(userid, pwd, name);
-    res.redirect('/jobque/login?msg=success');
+    res.redirect('/jobque/login');
 };
 
 export const getLogin = (req, res) => {
@@ -19,19 +19,18 @@ export const postLogin = async (req, res) => {
     const { userid, pwd } = req.body;
     const row = await loginMember(userid, pwd);
     const user = row;
+    console.log("로그인 성공");
     if(user) {
-        req.session.users_id = user.id;
         req.session.userid = user.userid;
-        req.session.username = user.name;
         res.redirect('/jobque/main');
     } else {
-        res.redirect('/jobque/login?msg=fail');
+        res.redirect('/jobque/login');
     }
 };
 
 export const logout = (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/jobque/login?msg=logout');
+        res.redirect('/jobque/login');
     });
 };
 
