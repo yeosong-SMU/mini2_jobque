@@ -14,8 +14,6 @@ router.post('/register', postRegister);
 router.get('/login', getLogin);    //로그인 화면으로
 router.post('/login', postLogin);    //로그인 체크 처리
 router.get('/logout', logout);
-//router.get('/main', main);
-// router.get('/logout', logout);
 router.get('/main', main);
 router.get('/popup', showPopup);
 // router.post('/update', update);

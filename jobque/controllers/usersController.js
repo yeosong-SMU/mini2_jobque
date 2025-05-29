@@ -20,9 +20,7 @@ export const postLogin = async (req, res) => {
     const row = await loginMember(userid, pwd);
     const user = row;
     if(user) {
-        req.session.users_id = user.id;
         req.session.userid = user.userid;
-        req.session.username = user.name;
         res.redirect('/jobque/main');
     } else {
         res.redirect('/jobque/login?msg=fail');
