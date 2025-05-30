@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>홈</title>
+  <meta charset="UTF-8" />
+  <title>JobQue 메인</title>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
 <%- include('partials/header', { user: member }) %>
 
+<main class="container">
+  <% if (!member) { %>
+    <h2>로그인이 필요합니다</h2>
+    <p>예상 질문과 답변은 로그인 후 확인할 수 있어요.</p>
+    <a href="/jobque/login"><button>로그인 하러 가기</button></a>
+  <% } else { %>
+    <h2><%= member.name %>님의 예상 질문 목록</h2>
 
-  <main>
-    <h2>안녕하세요</h2>
-    <p>이곳은 로그인 없이 접근 가능한 메인 페이지입니다.</p>
-    <p>나중에는 세션이 있어야만 접근 가능하도록 수정할 거예요.</p>
-  </main>
-  
-  <script>
-  // 페이지가 로드되면 쿠키를 확인하고 팝업 띄움
+    <% if (questions && questions.length > 0) { %>
+      <div class="card-container">
+        <% questions.forEach(q => { %>
+          <div class="card">
+            <div class="card-header">
+              <span class="category">[<%= q.category %>]</span>
+              <span class="date">
+  <%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '날짜 없음' %>
+</span>
+
+            </div>
+            <div class="card-body">
+              <p class="question-text"><%= q.ques %></p>
+
+              <div class="answer-section">
+                <% if (q.comment) { %>
+                  <p class="answer-text"><%= q.comment %></p>
+                <% } else { %>
+                  <p class="no-answer">아직 작성하지 않은 질문이에요.</p>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p>등록된 질문이 없습니다.</p>
+    <% } %>
+  <% } %>
+</main>
+
+<script>
   window.onload = function () {
     const hidePopup = document.cookie.includes('hidePopup=true');
     if (!hidePopup) {

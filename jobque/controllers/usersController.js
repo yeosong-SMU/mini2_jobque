@@ -46,17 +46,16 @@ export const showPopup = (req, res) => {
 //     res.render('list', {members});
 // };
 
-// export const main = async (req, res) => {
-//     // 테스트하기 위해 임시로 주석 처리할게요
-//     // if(!req.session.userid) {
-//     //     res.redirect('/jopque/login?msg=authority');
-//     // }
-//     const member = req.session.userid
-//         ? await findByUserId(req.session.userid)
-//         : null;
+export const main = async (req, res) => {
+    if(!req.session.userid) {
+        res.redirect('/jopque/login?msg=authority');
+    }
+    const member = req.session.userid
+        ? await findByUserId(req.session.userid)
+        : null;
 
-//     res.render('main', { member: member, session: req.session });
-// };
+    res.render('main', { member: member, session: req.session, questions: questions });
+};
 
 // export const updateBoard = async (req, res) => {
 //     const {users_id} = req.params;

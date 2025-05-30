@@ -3,16 +3,20 @@ import { findByUserId, listQues, detailQues, listComment, createQues, updateQues
 // 로그인 후 나의 페이지
 export const main = async (req, res) => {
     //user의 id를 받아서 그걸로 listQues 출력
+    let member = null;
+    let questions = [];
 
     if(!req.session.userid) {
-        res.redirect('/jopque/login');
+        res.redirect('/jobque/login');
     }
 
     // const list = await listQues(req.session.users_id);
 
     // res.render("main", {list: list});
-    const member = await findByUserId(req.session.userid);
-    res.render('main', {member: member, session: req.session});
+        member = await findByUserId(req.session.userid);
+        questions = await listQues(member.id)
+        res.render('main', {member: member, session: req.session, questions: questions,});
+
 
     // const member = req.session.userid
     //     ? await findByUserId(req.session.userid)
