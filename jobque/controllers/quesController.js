@@ -14,8 +14,10 @@ export const main = async (req, res) => {
 
     // res.render("main", {list: list});
         member = await findByUserId(req.session.userid);
-        questions = await listQues(member.id)
-        res.render('main', {member: member, session: req.session, questions: questions,});
+        questions = await listQues(member.id);
+        // console.log(member);
+        // console.log(questions);
+        res.render('main', {member: member, session: req.session, questions: questions});
 
 
     // const member = req.session.userid
@@ -40,8 +42,8 @@ export const clickQues = async (req, res) => {
     const users_id = req.session.users_id;
     const board_id = req.session.board_id;
 
-    const [result] = await detailQues(board_id);
-    const [comment_list] = await listComment(users_id, board_id);
+    const result = await detailQues(board_id);
+    const comment_list = await listComment(users_id, board_id);
     res.render("detail", { row: result[0], comment_list: comment_list });
 };
 

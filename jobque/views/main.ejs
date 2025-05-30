@@ -17,7 +17,7 @@
   <% } else { %>
     <h2><%= member.name %>님의 예상 질문 목록</h2>
 
-    <% if (questions && questions.length > 0) { %>
+    <% if (questions && questions[0].cnt > 0) { %>
       <div class="card-container">
         <% questions.forEach(q => { %>
           <div class="card">
