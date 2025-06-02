@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <%- include('partials/header', { user: member }) %>
+  <%- include('partials/header') %>
 
   <% if (!session.userid) { %>
     <div class="login-required" style="text-align: center; margin-top: 50px;">
@@ -35,9 +35,9 @@
       </div>
     </div>
 
-    <div class="card-grid" onclick="location.href='/jobque/answer/list'">
+    <div class="card-grid">
       <% questions.forEach(q => { %>
-        <div class="card">
+        <div class="card" onclick="location.href='/jobque/answer/list/<%=q.id%>'">
           <div class="question-title"><%= q.ques %></div>
           <div class="question-date">
             <small><%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '작성일 없음' %></small>

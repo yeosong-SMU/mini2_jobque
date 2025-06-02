@@ -15,7 +15,7 @@ export const main = async (req, res) => {
 
     // res.render("main", {list: list});
         //member = await findByUserId(req.session.userid);
-        questions = await listQues(req.session.userid, req.session.userid);
+        questions = await listQues(req.session.users_id, req.session.users_id);
         //basic = await listBasic(member.id, member.id);
         // console.log(member);
         //console.log(questions);
@@ -45,11 +45,12 @@ export const create_Ques = async (req, res) => {
 export const clickQues = async (req, res) => {
     const users_id = req.session.users_id;
     const board_id = req.params.board_id;
-    console.log("board_id: " + board_id);
+    
     //req.session.board_id = board_id;
     const [result] = await detailQues(board_id);
-    const [comment_list] = await listComment(users_id, board_id);
-    res.render("answer/answer_list/:id", { session: req.session, question:result, comments: comment_list });
+    const comment_list = await listComment(users_id, board_id); ///:board_id
+    console.log(comment_list);
+    res.render("answer/answer_list", { session: req.session, question:result, comments: comment_list });
 };
 
 // 질문 업데이트

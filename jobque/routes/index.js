@@ -22,7 +22,7 @@ router.get('/popup', showPopup);
 router.get('/question/form', getCreateQ);
 router.post('/question/write', create_Ques);
 
-router.get('/answer/list/:id', clickQues);
+router.get('/answer/list/:board_id', clickQues);
 router.get('/answer/form', getCreateC);
 router.post('/answer/write', create_Comment);
 router.post('/comment/update', update_Comment);

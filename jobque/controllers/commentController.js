@@ -1,5 +1,16 @@
 import { createComment, updateComment, removeComment } from "../models/JobqueDAO.js";
 
+// 댓글 조회
+export const clickQues = async (req, res) => {
+    const users_id = req.session.users_id;
+    const board_id = req.params.board_id;
+    console.log("board_id: " + board_id);
+    //req.session.board_id = board_id;
+    const [result] = await detailQues(board_id);
+    const [comment_list] = await listComment(users_id, board_id);
+    res.render("answer/answer_list", { session: req.session, question:result, comments: comment_list });
+};
+
 // 댓글 생성
 export const create_Comment = async (req, res) => {
     const users_id = req.session.users_id;
