@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>답변 목록</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header', { user: session.userid }) %>
+
+  <main class="answer-list">
+    <h2><%= question.ques %></h2>
+    <p class="question-category">[<%= question.category %>]</p>
+
+    <% if (comments.length === 0) { %>
+      <p>아직 작성된 답변이 없습니다.</p>
+    <% } else { %>
+        <ul>
+        <% comments.forEach(c => { %>
+            <li class="comment-card">
+            <p><%= c.comment %></p>
+            <p class="meta">작성자: <%= c.name %> | 작성일: <%= new Date(c.post_date).toISOString().slice(0, 10) %></p>
+
+            <% if (session.users_id === c.users_id) { %>
+                <!-- 댓글 수정 폼 -->
+                <form action="/jobque/comment/update" method="POST" style="margin-top: 10px;">
+                <input type="hidden" name="comment_id" value="<%= c.id %>">
+                <input type="text" name="comment" value="<%= c.comment %>" required>
+                <button type="submit">수정</button>
+                </form>
+
+                <!-- 댓글 삭제 폼 -->
+                <form action="/jobque/comment/delete" method="POST" style="margin-top: 5px;">
+                <input type="hidden" name="comment_id" value="<%= c.id %>">
+                <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
+                </form>
+            <% } %>
+        </li>
+        <% }) %>
+        </ul>
+    <% } %>
+
+    <button onclick="history.back()">돌아가기</button>
+  </main>
+</body>
+</html>

@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="card-grid">
+    <div class="card-grid" onclick="location.href='/jobque/answer/list'">
       <% questions.forEach(q => { %>
         <div class="card">
           <div class="question-title"><%= q.ques %></div>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="bottom-btn">
-      <button>더보기</button>
+      <button onclick="location.href='/jobque/question/list'">더보기</button>
     </div>
 
   <% } %>

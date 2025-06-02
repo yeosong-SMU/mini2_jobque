@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>답변 수정</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header', { user: session.userid }) %>
+
+  <main class="edit-answer">
+    <h2>답변 수정</h2>
+
+    <form action="/jobque/answer/update" method="POST">
+      <input type="hidden" name="comment_id" value="<%= comment.id %>">
+      <textarea name="comment" rows="5" required><%= comment.comment %></textarea>
+      <button type="submit">수정 완료</button>
+    </form>
+
+    <!-- 삭제 폼 -->
+    <form action="/jobque/answer/delete" method="POST" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="margin-top: 20px;">
+      <input type="hidden" name="comment_id" value="<%= comment.id %>">
+      <button type="submit" class="delete-btn">답변 삭제</button>
+    </form>
+
+    <button onclick="history.back()">← 돌아가기</button>
+  </main>
+</body>
+</html>
