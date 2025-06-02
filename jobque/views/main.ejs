@@ -34,26 +34,26 @@
         <button onclick="location.href='/jobque/answer/form'">답변 추가</button>
       </div>
     </div>
-
-    <div class="card-grid" onclick="location.href='/jobque/answer/list'">
+    <div class="card-grid">
       <% questions.forEach(q => { %>
-        <div class="card">
-          <div class="question-title"><%= q.ques %></div>
-          <div class="question-date">
-            <small><%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '작성일 없음' %></small>
+        <a href="/jobque/answer/list/<%= q.id %>" style="text-decoration: none; color: inherit;">
+          <div class="card">
+            <div class="question-title"><%= q.ques %></div>
+            <div class="question-date">
+              <small><%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '작성일 없음' %></small>
+            </div>
+            <div class="answer">
+              <% if (q.comment) { %>
+                <p><%= q.comment %></p>
+              <% } else { %>
+                <p class="no-answer">아직 답변을 작성하지 않았어요.</p>
+              <% } %>
+            </div>
+            <div class="card-footer">[<%= q.category %>]</div>
           </div>
-          <div class="answer">
-            <% if (q.comment) { %>
-              <p><%= q.comment %></p>
-            <% } else { %>
-              <p class="no-answer">아직 답변을 작성하지 않았어요.</p>
-            <% } %>
-          </div>
-          <div class="card-footer">[<%= q.category %>]</div>
-        </div>
+        </a>
       <% }) %>
     </div>
-
     <div class="bottom-btn">
       <button onclick="location.href='/jobque/question/list'">더보기</button>
     </div>
