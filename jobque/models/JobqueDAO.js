@@ -32,14 +32,14 @@ export const findByUserId = async (userid) => {
 
 // 조회
 export const listQues = async (users_id) => {
-    const [rows] = await pool.execute('select id, users_id, category, ques, basic, post_date, (select count(*) from jq_board where users_id = b.users_id) cnt, (select comment from jq_comment where board_id = b.id and users_id = b.users_id order by id desc limit 1) comment from jq_board b where users_id = ?', [users_id]);
+    const [rows] = await pool.execute('select id, users_id, category, ques, basic, post_date, (select comment from jq_comment where board_id = b.id and users_id = ? order by id desc limit 1) comment from jq_board b where users_id = ? or users_id = 1', [users_id, users_id]);
     return rows;
 };
 
-export const listBasic = async (users_id) => {
-    const [rows] = await pool.execute('select id, users_id, c.users_id, category, ques, basic, post_date, (select count(*) from jq_board where users_id = b.users_id) cnt, (select comment from jq_comment where board_id = b.id and users_id = ? order by id desc limit 1) comment from jq_board b where b.users_id = 1', [users_id]);
-    return rows;
-};
+// export const listBasic = async (users_id) => {
+//     const [rows] = await pool.execute('select b.id, b.users_id, c.users_id, category, ques, basic, b.post_date, (select comment from jq_comment where board_id = b.id and users_id = ? order by id desc limit 1) comment from jq_board b, jq_comment c where b.users_id = 1', [users_id]);
+//     return rows;
+// };
 
 export const detailQues = async (board_id) => {
     const [rows] = await pool.execute('select * from jq_board where id = ?', [board_id]);

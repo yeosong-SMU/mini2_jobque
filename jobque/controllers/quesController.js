@@ -5,6 +5,7 @@ export const main = async (req, res) => {
     //user의 id를 받아서 그걸로 listQues 출력
     let member = null;
     let questions = [];
+    //let basic = [];
 
     if(!req.session.userid) {
         res.redirect('/jobque/login');
@@ -14,9 +15,11 @@ export const main = async (req, res) => {
 
     // res.render("main", {list: list});
         member = await findByUserId(req.session.userid);
-        questions = await listQues(member.id);
+        questions = await listQues(member.id, member.id);
+        //basic = await listBasic(member.id, member.id);
         // console.log(member);
-        // console.log(questions);
+        console.log(questions);
+        //console.log(basic);
         res.render('main', {member: member, session: req.session, questions: questions});
 
 
