@@ -6,7 +6,7 @@ export const create_Comment = async (req, res) => {
     const {board_id, comment} = req.body;
 
     await createComment(users_id, board_id, comment);
-    res.redirect('/jobque/detail');
+    res.redirect('/jobque/answer/answer_list');
 };
 
 // 댓글 수정
@@ -15,7 +15,7 @@ export const update_Comment = async (req, res) => {
     const comment = req.body;
     
     await updateComment(comment, comment_id);
-    res.redirect('/jobque/detail');
+    res.redirect('/jobque/answer/answer_list');
 };
 
 // 댓글 삭제
@@ -23,5 +23,9 @@ export const remove_Comment = async(req, res) => {
     const {comment_id} = req.session.comment_id;
 
     await removeComment(comment_id);
-    res.redirect('/jobque/detail');
+    res.redirect('/jobque/answer/answer_list');
+};
+
+export const getCreateC = (req, res) => {
+    res.render('answer/answer_form', {session: req.session});
 };

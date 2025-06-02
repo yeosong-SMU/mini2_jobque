@@ -11,8 +11,7 @@ export const postRegister = async (req, res) => {
 };
 
 export const getLogin = (req, res) => {
-    const msg = req.query.msg || null;
-    res.render('login', {msg});
+    res.render('login');
 };
 
 export const postLogin = async (req, res) => {
@@ -22,6 +21,8 @@ export const postLogin = async (req, res) => {
     console.log("로그인 성공");
     if(user) {
         req.session.userid = user.userid;
+        req.session.name = user.name;
+        req.session.users_id = user.id;
         res.redirect('/jobque/main');
     } else {
         res.redirect('/jobque/login');
@@ -46,16 +47,16 @@ export const showPopup = (req, res) => {
 //     res.render('list', {members});
 // };
 
-export const main = async (req, res) => {
-    if(!req.session.userid) {
-        res.redirect('/jopque/login?msg=authority');
-    }
-    const member = req.session.userid
-        ? await findByUserId(req.session.userid)
-        : null;
+// export const main = async (req, res) => {
+//     if(!req.session.userid) {
+//         res.redirect('/jopque/login?msg=authority');
+//     }
+//     const member = req.session.userid
+//         ? await findByUserId(req.session.userid)
+//         : null;
 
-    res.render('main', { member: member, session: req.session, questions: questions });
-};
+//     res.render('main', { member: member, session: req.session, questions: questions });
+// };
 
 // export const updateBoard = async (req, res) => {
 //     const {users_id} = req.params;

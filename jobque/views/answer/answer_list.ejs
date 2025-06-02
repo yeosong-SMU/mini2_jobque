@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <%- include('../partials/header', { user: session.userid }) %>
+  <%- include('../partials/header') %>
 
   <main class="answer-list">
     <h2><%= question.ques %></h2>
@@ -40,7 +40,7 @@
         </ul>
     <% } %>
 
-    <button onclick="history.back()">돌아가기</button>
+    <button onclick="history.back()">돌아가기></button>
   </main>
 </body>
 </html>
