@@ -16,7 +16,7 @@ router.post('/login', postLogin);    //로그인 체크 처리
 router.get('/logout', logout);
 router.get('/main', main);
 router.get('/popup', showPopup);
-// router.post('/update', update);
-// // router.post('/remove', remove);
+//router.post('/update', update);
+// router.post('/remove', remove);
 
 export default router;

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>답변 작성</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header', { user: session.userid }) %>
+
+  <main class="answer-form">
+    <h2>답변 작성</h2>
+
+    <div class="question-box">
+      <p class="category">[<%= question.category %>]</p>
+      <p class="ques"><%= question.ques %></p>
+    </div>
+
+    <form action="/jobque/answer/write" method="POST">
+      <input type="hidden" name="board_id" value="<%= question.id %>" />
+
+      <label for="comment">답변</label><br />
+      <textarea name="comment" id="comment" rows="8" required></textarea><br /><br />
+
+      <button type="submit">등록</button>
+      <button type="button" onclick="history.back()">취소</button>
+    </form>
+  </main>
+</body>
+</html>

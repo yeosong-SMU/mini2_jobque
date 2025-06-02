@@ -2,53 +2,65 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>JobQue 메인</title>
+  <title>잡큐</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
-<%- include('partials/header', { user: member }) %>
+  <%- include('partials/header', { user: member }) %>
 
-<main class="container">
-  <% if (!member) { %>
-    <h2>로그인이 필요합니다</h2>
-    <p>예상 질문과 답변은 로그인 후 확인할 수 있어요.</p>
-    <a href="/jobque/login"><button>로그인 하러 가기</button></a>
+  <% if (!session.userid) { %>
+    <div class="login-required" style="text-align: center; margin-top: 50px;">
+      <p>로그인해야 열람할 수 있습니다.</p>
+      <a href="/jobque/login"><button>로그인하러 가기</button></a>
+    </div>
   <% } else { %>
-    <h2><%= member.name %>님의 예상 질문 목록</h2>
 
-    <% if (questions && questions[0].cnt > 0) { %>
-      <div class="card-container">
-        <% questions.forEach(q => { %>
-          <div class="card">
-            <div class="card-header">
-              <span class="category">[<%= q.category %>]</span>
-              <span class="date">
-  <%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '날짜 없음' %>
-</span>
-
-            </div>
-            <div class="card-body">
-              <p class="question-text"><%= q.ques %></p>
-
-              <div class="answer-section">
-                <% if (q.comment) { %>
-                  <p class="answer-text"><%= q.comment %></p>
-                <% } else { %>
-                  <p class="no-answer">아직 작성하지 않은 질문이에요.</p>
-                <% } %>
-              </div>
-            </div>
-          </div>
-        <% }) %>
+    <div class="top-bar">
+      <div class="top-left">
+        <form id="categoryForm" method="GET" action="/jobque/main" style="display: flex; gap: 10px;">
+          <label for="category">카테고리별 보기</label>
+          <select name="category" id="category" onchange="document.getElementById('categoryForm').submit()">
+            <option value="">전체</option>
+            <option value="기본">기본</option>
+            <option value="인성">인성</option>
+            <option value="프론트엔드">프론트엔드</option>
+            <option value="백엔드">백엔드</option>
+          </select>
+        </form>    
       </div>
-    <% } else { %>
-      <p>등록된 질문이 없습니다.</p>
-    <% } %>
-  <% } %>
-</main>
+      <div class="top-left">
+        <button onclick="location.href='/jobque/question/form'">질문 추가</button>
+        <button onclick="location.href='/jobque/answer/form'">답변 추가</button>
+      </div>
+    </div>
 
-<script>
+    <div class="card-grid" onclick="location.href='/jobque/answer/list'">
+      <% questions.forEach(q => { %>
+        <div class="card">
+          <div class="question-title"><%= q.ques %></div>
+          <div class="question-date">
+            <small><%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '작성일 없음' %></small>
+          </div>
+          <div class="answer">
+            <% if (q.comment) { %>
+              <p><%= q.comment %></p>
+            <% } else { %>
+              <p class="no-answer">아직 답변을 작성하지 않았어요.</p>
+            <% } %>
+          </div>
+          <div class="card-footer">[<%= q.category %>]</div>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="bottom-btn">
+      <button onclick="location.href='/jobque/question/list'">더보기</button>
+    </div>
+
+  <% } %>
+
+  <script>
   window.onload = function () {
     const hidePopup = document.cookie.includes('hidePopup=true');
     if (!hidePopup) {
@@ -56,6 +68,5 @@
     }
   };
 </script>
-
 </body>
 </html>
