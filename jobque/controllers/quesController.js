@@ -20,7 +20,7 @@ export const main = async (req, res) => {
         // console.log(member);
         //console.log(questions);
         //console.log(basic);
-        console.log(req.session);
+        //console.log(req.session);
         res.render('main', {session: req.session, questions: questions});
 
 
@@ -49,7 +49,7 @@ export const clickQues = async (req, res) => {
     //req.session.board_id = board_id;
     const [result] = await detailQues(board_id);
     const comment_list = await listComment(users_id, board_id); ///:board_id
-    console.log(comment_list);
+    console.log(board_id);
     res.render("answer/answer_list", { session: req.session, question:result, comments: comment_list });
 };
 
