@@ -8,7 +8,7 @@ export const main = async (req, res) => {
     //let basic = [];
 
     if(!req.session.userid) {
-        res.redirect('/jobque/login');
+        return res.redirect('/jobque/login');
     }
 
     // const list = await listQues(req.session.users_id);
@@ -55,8 +55,7 @@ export const clickQues = async (req, res) => {
 
 // 질문 업데이트
 export const update_Ques = async (req, res) => {
-    const board_id = req.session.board_id;
-    const { category, ques } = req.body;
+    const { board_id, category, ques } = req.body;
     
     await updateQues(category, ques, board_id);
     res.redirect('/jobque/main');
@@ -64,7 +63,7 @@ export const update_Ques = async (req, res) => {
 
 // 질문 삭제
 export const remove_Ques = async(req, res) => {
-    const {board_id} = req.session.board_id;
+    const board_id = req.body;
 
     await removeQues(board_id);
     res.redirect('/jobque/main');

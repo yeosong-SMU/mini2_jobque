@@ -22,8 +22,8 @@ export const create_Comment = async (req, res) => {
 
 // 댓글 수정
 export const update_Comment = async (req, res) => {
-    const comment_id = req.params.comments_id;
-    const comment = req.params.comments;
+    const {comment_id, comment} = req.body;
+
     console.log("comment_id : " + comment_id);
     console.log("comment : " + comment);
     await updateComment(comment, comment_id);
@@ -32,7 +32,7 @@ export const update_Comment = async (req, res) => {
 
 // 댓글 삭제
 export const remove_Comment = async(req, res) => {
-    const {comment_id} = req.session.comment_id;
+    const comment_id = req.body;
 
     await removeComment(comment_id);
     res.redirect('/jobque/answer/answer_list');
