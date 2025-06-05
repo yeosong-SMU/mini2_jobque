@@ -26,26 +26,36 @@
   </script>
 </head>
 <body>
-  <h1>회원가입</h1>
+  <div class="container">
+    <h2>회원가입</h2>
 
-  <form action="/jopque/register" method="POST">
-    <label for="name">이름</label><br>
-    <input type="text" id="name" name="name" required><br><br>
+    <form action="/jopque/register" method="POST" class="register-form">
+      <div>
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" required>
+      </div>
 
-    
-    <label for="userid">아이디</label><br>
-    <input type="text" id="userid" name="userid" required><br><br>
+      <div>
+        <label for="userid">아이디</label>
+        <input type="text" id="userid" name="userid" required>
+      </div>
 
-    <label for="pwd">비밀번호</label><br>
-    <input type="password" id="pwd" name="pwd" required oninput="checkPasswordMatch()"><br><br>
+      <div>
+        <label for="pwd">비밀번호</label>
+        <input type="password" id="pwd" name="pwd" required oninput="checkPasswordMatch()">
+      </div>
 
-    <label for="confirmPwd">비밀번호 확인</label><br>
-    <input type="password" id="confirmPwd" oninput="checkPasswordMatch()" required><br>
-    <span id="pwdMsg"></span><br><br>
+      <div>
+        <label for="confirmPwd">비밀번호 확인</label>
+        <input type="password" id="confirmPwd" oninput="checkPasswordMatch()" required>
+        <span id="pwdMsg" class="pwd-message"></span>
+      </div>
 
-    <button type="submit">가입하기</button>
-  </form>
+      <button type="submit">가입하기</button>
+    </form>
 
-  <p>이미 계정이 있으신가요? <a href="/jobque/login">로그인</a></p>
+    <p>이미 계정이 있으신가요? <a href="/jobque/login">로그인</a></p>
+  </div>
 </body>
+
 </html>

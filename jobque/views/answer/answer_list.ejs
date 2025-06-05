@@ -8,39 +8,57 @@
 <body>
   <%- include('../partials/header') %>
 
-  <main class="answer-list">
-    <h2><%= question.ques %></h2>
-    <p class="question-category">[<%= question.category %>]</p>
+  <main class="answer-list" style="max-width: 800px; margin: auto;">
+    
+    <!-- 질문 제목 -->
+    <div class="question-header">
+      <h2>[<%= question.category %>] <%= question.ques %></h2>
+    </div>
 
+    <!-- 답변 목록 -->
     <% if (comments.length === 0) { %>
       <p>아직 작성된 답변이 없습니다.</p>
     <% } else { %>
-        <ul>
-        <% comments.forEach(c => { %>
-            <li class="comment-card">
-            <p><%= c.comment %></p>
-            <p class="meta">작성자: <%= c.name %> | 작성일: <%= new Date(c.post_date).toISOString().slice(0, 10) %></p>
+      <ul style="list-style: none; padding: 0;">
+        <% comments.forEach((c, index) => { %>
+          <li class="comment-box">
+            <p><strong>답변:</strong> <%= c.comment %></p>
+            <p class="comment-meta">작성일: <%= new Date(c.post_date).toISOString().slice(0, 10) %></p>
 
             <% if (session.users_id === c.users_id) { %>
-                <!-- 댓글 수정 폼 -->
-                <form action="/jobque/comment/update" method="POST" style="margin-top: 10px;">
+              <div class="action-buttons">
+                <button onclick="toggleEditForm('<%= index %>')">수정</button>
+
+                <form action="/jobque/comment/delete" method="POST" style="display: inline;">
+                  <input type="hidden" name="comment_id" value="<%= c.id %>">
+                  <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
+                </form>
+              </div>
+
+              <!-- 수정 폼 -->
+              <form id="editForm-<%= index %>" class="edit-form" action="/jobque/comment/update" method="POST">
                 <input type="hidden" name="comment_id" value="<%= c.id %>">
                 <input type="text" name="comment" value="<%= c.comment %>" required>
-                <button type="submit">수정</button>
-                </form>
-
-                <!-- 댓글 삭제 폼 -->
-                <form action="/jobque/comment/delete" method="POST" style="margin-top: 5px;">
-                <input type="hidden" name="comment_id" value="<%= c.id %>">
-                <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
-                </form>
+                <button type="submit">수정 완료</button>
+              </form>
             <% } %>
-        </li>
+          </li>
         <% }) %>
-        </ul>
+      </ul>
     <% } %>
 
-    <button onclick="history.back()">돌아가기></button>
+    <!-- 하단 버튼 -->
+    <div class="answer-footer-buttons">
+      <button onclick="history.back()">돌아가기</button>
+      <button onclick="location.href='/jobque/answer/form?board_id=<%= question.id %>'">답변 추가</button>
+    </div>
   </main>
+
+  <script>
+    function toggleEditForm(index) {
+      const form = document.getElementById(`editForm-${index}`);
+      form.style.display = form.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>

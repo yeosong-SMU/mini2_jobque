@@ -1,26 +1,30 @@
-<!-- views/popup.ejs -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>채용 공고 알림</title>
   <link rel="stylesheet" href="/css/popup.css">
   <script defer src="/js/popup.js"></script>
 </head>
 <body>
   <div class="popup">
-    <h2>취업 준비 중이신가요?</h2>
+    <h1>취업 준비 중이신가요?</h1>
     <p>아래 사이트에서 최신 채용 정보를 확인하세요!</p>
-    <div>
-      <a href="https://www.saramin.co.kr" target="_blank">사람인 바로가기</a><br>
-      <a href="https://www.jobkorea.co.kr" target="_blank">잡코리아 바로가기</a>
+
+    <div class="popup-links">
+      <a href="https://www.saramin.co.kr" target="_blank"><h3>사람인 바로가기</h3></a>
+      <a href="https://www.jobkorea.co.kr" target="_blank"><h3>잡코리아 바로가기</h3></a>
     </div>
-    <div style="margin-top: 20px;">
+  
+    
+    <div class="popup-option">
       <label>
         <input type="checkbox" id="noShow"> 7일간 이 창 보지 않기
       </label>
     </div>
-    <div>
+
+    <div class="popup-button">
       <button onclick="closePopup()">닫기</button>
     </div>
   </div>

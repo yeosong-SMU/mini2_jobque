@@ -1,8 +1,7 @@
-<header style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #f0f0f0;">
-  <h2 style="margin: 0;"><a href="/jobque/main">JobQue</a></h2>
-  <div>
+<header class="main-header">
+  <h1 class="logo"><a href="/jobque/main">JobQ</a></h1>
+  <div class="user-info">
     <span><%= session ? session.name : '' %>님</span>
-    <a href="/jobque/logout" style="margin-left: 10px;">로그아웃</a>
+    <a href="/jobque/logout" class="logout-link">로그아웃</a>
   </div>
 </header>
-<hr>
