@@ -32,6 +32,7 @@
 
                 <form action="/jobque/comment/delete" method="POST" style="display: inline;">
                   <input type="hidden" name="comment_id" value="<%= c.id %>">
+                  <input type="hidden" name="board_id" value="<%= question.id %>">
                   <button type="submit" onclick="return confirm('정말 삭제할까요?')">삭제</button>
                 </form>
               </div>
@@ -39,6 +40,7 @@
               <!-- 수정 폼 -->
               <form id="editForm-<%= index %>" class="edit-form" action="/jobque/comment/update" method="POST">
                 <input type="hidden" name="comment_id" value="<%= c.id %>">
+                <input type="hidden" name="board_id" value="<%= question.id %>">
                 <input type="text" name="comment" value="<%= c.comment %>" required>
                 <button type="submit">수정 완료</button>
               </form>
@@ -51,6 +53,7 @@
     <!-- 하단 버튼 -->
     <div class="answer-footer-buttons">
       <button onclick="history.back()">돌아가기</button>
+      <!-- <button onclick="location.href='/jobque/main'">돌아가기</button> -->
       <button onclick="location.href='/jobque/answer/form?board_id=<%= question.id %>'">답변 추가</button>
     </div>
   </main>

@@ -1,34 +1,23 @@
-import { findByUserId, listQues, detailQues, listComment, createQues, updateQues, removeQues } from "../models/JobqueDAO.js";
+import { findByUserId, listQues, detailQues, categoryQues, listComment, createQues, updateQues, removeQues } from "../models/JobqueDAO.js";
 
 // 로그인 후 나의 페이지
 export const main = async (req, res) => {
     //user의 id를 받아서 그걸로 listQues 출력
-    //let member = null;
+    const users_id = req.session.users_id;
+    const {category} = req.query;
     let questions = [];
-    //let basic = [];
 
-    if(!req.session.userid) {
+    if(!users_id) {
         return res.redirect('/jobque/login');
     }
 
-    // const list = await listQues(req.session.users_id);
+    if(category && category !== '') {
+        questions = await categoryQues(users_id, category);
+    } else {
+        questions = await listQues(users_id);
+    }
 
-    // res.render("main", {list: list});
-        //member = await findByUserId(req.session.userid);
-        questions = await listQues(req.session.users_id, req.session.users_id);
-        //basic = await listBasic(member.id, member.id);
-        // console.log(member);
-        //console.log(questions);
-        //console.log(basic);
-        //console.log(req.session);
-        res.render('main', {session: req.session, questions: questions});
-
-
-    // const member = req.session.userid
-    //     ? await findByUserId(req.session.userid)
-    //     : null;
-    
-    // res.render('main', {member: member, session: req.session});
+    res.render('main', {session: req.session, questions: questions, category: category});
 };
 
 // 질문 생성
@@ -46,10 +35,8 @@ export const clickQues = async (req, res) => {
     const users_id = req.session.users_id;
     const board_id = req.params.board_id;
     
-    //req.session.board_id = board_id;
     const [result] = await detailQues(board_id);
     const comment_list = await listComment(users_id, board_id); ///:board_id
-    console.log(board_id);
     res.render("answer/answer_list", { session: req.session, question:result, comments: comment_list });
 };
 
@@ -58,21 +45,39 @@ export const update_Ques = async (req, res) => {
     const { board_id, category, ques } = req.body;
     
     await updateQues(category, ques, board_id);
-    res.redirect('/jobque/main');
+    res.redirect('/jobque/question/list');
 };
 
 // 질문 삭제
 export const remove_Ques = async(req, res) => {
-    const board_id = req.body;
+    const board_id = req.params.board_id;
 
     await removeQues(board_id);
-    res.redirect('/jobque/main');
+    res.redirect('/jobque/question/list');
 };
 
-export const getCreateQ = (req, res) => {
+export const getCreateQ = async(req, res) => {
     res.render('question/question_form', {session: req.session});
 };
 
-export const getListQ = (req, res) => {
-    res.render('question/question_list', {session: req.session});
+export const getListQ = async(req, res) => {
+    const users_id = req.session.users_id;
+    const {category} = req.query;
+    let questions = [];
+    //console.log("선택된 카테고리:", category);
+
+    if(category && category !== '') {
+        questions = await categoryQues(users_id, category);
+    } else {
+        questions = await listQues(users_id);
+    }
+    
+    res.render('question/question_list', {session: req.session, questions: questions, category: category});
+};
+
+export const getUpdateQ = async(req, res) => {
+    const board_id = req.params.board_id;
+    const [result] = await detailQues(board_id);
+
+    res.render('question/question_edit', {session: req.session, question: result});
 };

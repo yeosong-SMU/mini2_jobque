@@ -240,7 +240,7 @@ button {
 }
 
 /* 비밀번호 확인 메시지 */
-.pwd-message {
+.id-message, .pwd-message {
   font-size: 13px;
   margin-top: 5px;
   display: block;

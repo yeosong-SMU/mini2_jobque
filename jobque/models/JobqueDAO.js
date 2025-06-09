@@ -15,31 +15,16 @@ export const findByUserId = async (userid) => {
     return rows[0];
 };
 
-// export const findAll = async () => {
-//     const [rows] = await pool.execute('select * from jq_users');
-//     return rows;
-// };
-
-// export const updateMember = async (userid, name) => {
-//     const sql = 'update member set name = ? where userid = ?';
-//     return pool.execute(sql, [name, userid]);
-// };
-
-// export const removeMember = async (userid) => {
-//     const sql = 'delete from member where userid = ?';
-//     return pool.execute(sql, [userid]);
-// };
-
 // 조회
 export const listQues = async (users_id) => {
     const [rows] = await pool.execute('select id, users_id, category, ques, basic, post_date, (select comment from jq_comment where board_id = b.id and users_id = ? order by id desc limit 1) comment from jq_board b where users_id = ? or users_id = 1', [users_id, users_id]);
     return rows;
 };
 
-// export const listBasic = async (users_id) => {
-//     const [rows] = await pool.execute('select b.id, b.users_id, c.users_id, category, ques, basic, b.post_date, (select comment from jq_comment where board_id = b.id and users_id = ? order by id desc limit 1) comment from jq_board b, jq_comment c where b.users_id = 1', [users_id]);
-//     return rows;
-// };
+export const categoryQues = async (users_id, category) => {
+    const [rows] = await pool.execute('select id, users_id, category, ques, basic, post_date, (select comment from jq_comment where board_id = b.id and users_id = ? order by id desc limit 1) comment from jq_board b where (users_id = ? or users_id = 1) and category = ?', [users_id, users_id, category]);
+    return rows;
+};
 
 export const detailQues = async (board_id) => {
     const [rows] = await pool.execute('select * from jq_board where id = ?', [board_id]);

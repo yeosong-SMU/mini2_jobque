@@ -48,7 +48,7 @@
               </td>
               <td><%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '작성일 없음' %></td>
               <td>
-                <% if (session.userid === q.userid) { %>
+                <% if (session.users_id === q.users_id) { %>
                   <a href="/jobque/question/form/<%= q.id %>">수정</a> |
                   <form action="/jobque/question/delete/<%= q.id %>" method="POST" style="display: inline;">
                     <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>

@@ -22,10 +22,10 @@
         <label for="category">카테고리별 보기</label>
         <select name="category" id="category" onchange="document.getElementById('categoryForm').submit()">
           <option value="">전체</option>
-          <option value="기본">기본</option>
-          <option value="인성">인성</option>
-          <option value="프론트엔드">프론트엔드</option>
-          <option value="백엔드">백엔드</option>
+        <option value="기본" <%= category === '기본' ? 'selected' : '' %>>기본</option>
+        <option value="인성" <%= category === '인성' ? 'selected' : '' %>>인성</option>
+        <option value="프론트엔드" <%= category === '프론트엔드' ? 'selected' : '' %>>프론트엔드</option>
+        <option value="백엔드" <%= category === '백엔드' ? 'selected' : '' %>>백엔드</option>
         </select>
       </form>
 

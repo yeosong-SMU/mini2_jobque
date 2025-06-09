@@ -29,7 +29,7 @@
     </form>
 
     <!-- 삭제 버튼 -->
-    <form action="/jobque/question/delete" method="POST" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="margin-top: 20px;">
+    <form action="/jobque/question/delete/<%= question.id %>" method="POST" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="margin-top: 20px;">
       <input type="hidden" name="board_id" value="<%= question.id %>">
       <button type="submit" class="delete-btn">질문 삭제</button>
     </form>
