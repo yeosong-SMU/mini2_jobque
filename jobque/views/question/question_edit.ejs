@@ -8,33 +8,36 @@
 <body>
   <%- include('../partials/header', { user: session.userid }) %>
 
-  <main class="edit-question">
-    <h2>질문 수정</h2>
+  <main class="form-wrapper">
+    <div class="form-container">
+      <h2 class="form-title">질문 수정</h2>
 
-    <form action="/jobque/question/update" method="POST">
-      <input type="hidden" name="board_id" value="<%= question.id %>">
+      <form action="/jobque/question/update" method="POST" class="question-form">
+        <input type="hidden" name="board_id" value="<%= question.id %>">
 
-      <label for="category">카테고리</label>
-      <select name="category" id="category" required>
-        <option value="기본" <%= question.category === '기본' ? 'selected' : '' %>>기본</option>
-        <option value="인성" <%= question.category === '인성' ? 'selected' : '' %>>인성</option>
-        <option value="프론트엔드" <%= question.category === '프론트엔드' ? 'selected' : '' %>>프론트엔드</option>
-        <option value="백엔드" <%= question.category === '백엔드' ? 'selected' : '' %>>백엔드</option>
-      </select>
+        <div class="form-group">
+          <label for="category">카테고리</label>
+          <select name="category" id="category" required>
+            <option value="기본" <%= question.category === '기본' ? 'selected' : '' %>>기본</option>
+            <option value="인성" <%= question.category === '인성' ? 'selected' : '' %>>인성</option>
+            <option value="프론트엔드" <%= question.category === '프론트엔드' ? 'selected' : '' %>>프론트엔드</option>
+            <option value="백엔드" <%= question.category === '백엔드' ? 'selected' : '' %>>백엔드</option>
+          </select>
+        </div>
 
-      <label for="ques">질문</label>
-      <textarea name="ques" id="ques" rows="5" required><%= question.ques %></textarea>
+        <div class="form-group">
+          <label for="ques">질문</label>
+          <textarea name="ques" id="ques" rows="8" placeholder="질문 내용을 입력하세요" required><%= question.ques %></textarea>
+        </div>
 
-      <button type="submit">수정 완료</button>
-    </form>
+        <div class="answer-footer-buttons">
+          <button type="button" class="btn btn-secondary" onclick="history.back()">돌아가기</button>
+          <button type="submit" class="btn btn-primary">수정 완료</button>
+        </div>
+      </form>
 
-    <!-- 삭제 버튼 -->
-    <form action="/jobque/question/delete/<%= question.id %>" method="POST" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="margin-top: 20px;">
-      <input type="hidden" name="board_id" value="<%= question.id %>">
-      <button type="submit" class="delete-btn">질문 삭제</button>
-    </form>
 
-    <button onclick="history.back()">← 돌아가기</button>
+    </div>
   </main>
 </body>
 </html>

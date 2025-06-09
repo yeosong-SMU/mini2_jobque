@@ -9,10 +9,14 @@
   <%- include('../partials/header', { user: session.userid }) %>
 
   <main class="question-list">
-    <h2>전체 질문 목록</h2>
+
+    <div class="question-list-top">
+      <h2>전체 질문 목록</h2>
+      <button class="primary-btn" onclick="location.href='/jobque/question/form'">+ 질문 추가</button>
+    </div>
 
     <!-- 카테고리 필터 -->
-    <form id="categoryForm" method="GET" action="/jobque/question/list" style="margin-bottom: 20px;">
+    <form id="categoryForm" method="GET" action="/jobque/question/list" class="category-filter-form">
       <label for="category">카테고리별 보기</label>
       <select name="category" id="category" onchange="document.getElementById('categoryForm').submit()">
         <option value="">전체</option>
@@ -22,11 +26,11 @@
         <option value="백엔드" <%= category === '백엔드' ? 'selected' : '' %>>백엔드</option>
       </select>
     </form>
-    <!-- table 형식으로 받아오고 질문 클릭하면 answer/list로 가서 코멘트 내용 볼 수 있게 하면 좋을 듯-->
+
     <% if (questions.length === 0) { %>
-      <p>등록된 질문이 없습니다.</p>
+      <p class="no-questions">등록된 질문이 없습니다.</p>
     <% } else { %>
-      <table>
+      <table class="question-table">
         <thead>
           <tr>
             <th>번호</th>
@@ -42,19 +46,21 @@
               <td><%= idx + 1 %></td>
               <td><%= q.category %></td>
               <td>
-                <a href="/jobque/answer/list/<%= q.id %>" style="text-decoration: none;">
+                <a href="/jobque/answer/list/<%= q.id %>" class="question-link">
                   <%= q.ques.length > 50 ? q.ques.slice(0, 50) + '...' : q.ques %>
                 </a>
               </td>
               <td><%= q.post_date ? new Date(q.post_date).toISOString().slice(0, 10) : '작성일 없음' %></td>
               <td>
                 <% if (session.users_id === q.users_id) { %>
-                  <a href="/jobque/question/form/<%= q.id %>">수정</a> |
-                  <form action="/jobque/question/delete/<%= q.id %>" method="POST" style="display: inline;">
-                    <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-                  </form>
+                  <div class="action-buttons">
+                    <button class="edit-btn" onclick="location.href='/jobque/question/form/<%= q.id %>'">수정</button>
+                    <form action="/jobque/question/delete/<%= q.id %>" method="POST" class="delete-form">
+                      <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+                    </form>
+                  </div>
                 <% } else { %>
-                  <span style="color: #999;">-</span>
+                  <span class="no-access">-</span>
                 <% } %>
               </td>
             </tr>
@@ -63,7 +69,9 @@
       </table>
     <% } %>
 
-    <button onclick="history.back()">돌아가기</button>
+    <div class="bottom-btn">
+      <button class="back-btn" onclick="history.back()">돌아가기</button>
+    </div>
   </main>
 </body>
 </html>
