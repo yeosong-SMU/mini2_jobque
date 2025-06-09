@@ -8,22 +8,26 @@
 <body>
   <%- include('../partials/header', { user: session.users_id }) %>
 
-  <main class="answer-form">
-    <h2>답변 작성</h2>
+  <main class="form-page">
+    <h2 class="form-title">답변 작성</h2>
 
-    <div class="question-box">
+    <section class="question-preview">
       <p class="category">[<%= question.category %>]</p>
       <p class="ques"><%= question.ques %></p>
-    </div>
+    </section>
 
-    <form action="/jobque/answer/write" method="POST">
+    <form action="/jobque/answer/write" method="POST" class="form-box">
       <input type="hidden" name="board_id" value="<%= question.id %>" />
 
-      <label for="comment">답변</label><br />
-      <textarea name="comment" id="comment" rows="8" required></textarea><br /><br />
+      <div class="form-group">
+        <label for="comment">답변</label>
+        <textarea name="comment" id="comment" rows="8" required placeholder="여기에 답변을 입력하세요"></textarea>
+      </div>
 
-      <button type="submit">등록</button>
-      <button type="button" onclick="history.back()">취소</button>
+      <div class="answer-footer-buttons">
+        <button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
+        <button type="submit" class="btn btn-primary">등록</button>
+      </div>
     </form>
   </main>
 </body>
