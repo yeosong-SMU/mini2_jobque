@@ -81,3 +81,10 @@ export const getUpdateQ = async(req, res) => {
 
     res.render('question/question_edit', {session: req.session, question: result});
 };
+
+export const getEditQ = async(req, res) => {
+    const board_id = req.params.board_id;
+    const [result] = await detailQues(board_id);
+
+    res.render('question/question_edit', {session: req.session, question: result});
+};

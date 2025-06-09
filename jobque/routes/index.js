@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import { getRegister, postRegister, getLogin, postLogin, logout, checkId, showPopup } from '../controllers/usersController.js';
-import { main, create_Ques, clickQues, getListQ, remove_Ques, update_Ques, getCreateQ, getUpdateQ } from '../controllers/quesController.js';
-import { create_Comment, getCreateC, update_Comment, remove_Comment} from '../controllers/commentController.js';
+import { main, create_Ques, clickQues, getListQ, getEditQ, remove_Ques, update_Ques, getCreateQ, getUpdateQ } from '../controllers/quesController.js';
+import { create_Comment, getCreateC, getEditC, update_Comment, remove_Comment} from '../controllers/commentController.js';
 
 const router = Router();
 
@@ -17,15 +17,17 @@ router.get('/popup', showPopup);
 
 router.get('/question/list', getListQ);
 router.get('/question/form', getCreateQ);
-router.get('/question/form/:board_id', getUpdateQ);
+//router.get('/question/form/:board_id', getUpdateQ);
+router.get('/question/edit/:board_id', getEditQ);
 router.post('/question/write', create_Ques);
 router.post('/question/delete/:board_id', remove_Ques);
 router.post('/question/update', update_Ques);
 
 router.get('/answer/list/:board_id', clickQues);
 router.get('/answer/form', getCreateC);
+router.get('/answer/edit/:board_id/:comment_id', getEditC);
 router.post('/answer/write', create_Comment);
-router.post('/comment/update', update_Comment);
+router.post('/answer/update', update_Comment);
 router.post('/comment/delete', remove_Comment);
 
 export default router;

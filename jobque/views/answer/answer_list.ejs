@@ -42,7 +42,7 @@
             <% if (session.users_id === c.users_id) { %>
               <div class="action-buttons">
                 <!-- 수정 버튼: answer_edit 페이지로 이동 -->
-                <!-- <form action="/jobque/answer/edit" method="GET" style="display: inline;"> -->
+                <form action="/jobque/answer/edit/<%= question.id %>/<%= c.id %>" method="GET" style="display: inline;">
                 <form>
 
                   <input type="hidden" name="comment_id" value="<%= c.id %>">

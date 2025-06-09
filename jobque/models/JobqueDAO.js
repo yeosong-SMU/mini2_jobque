@@ -36,6 +36,11 @@ export const listComment = async (users_id, board_id) => {
     return rows;
 };
 
+export const detailComment = async (comment_id) => {
+    const [rows] = await pool.execute('select * from jq_comment where id = ?', [comment_id]);
+    return rows;
+};
+
 // 생성
 export const createQues = async (users_id, category, ques) => {
     return pool.execute('insert into jq_board (users_id, category, ques) values (?, ?, ?)', [users_id, category, ques]);

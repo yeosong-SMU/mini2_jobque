@@ -26,6 +26,7 @@
     <!-- 답변 수정 폼 -->
     <form action="/jobque/answer/update" method="POST" class="form-box">
       <input type="hidden" name="comment_id" value="<%= comment.id %>">
+      <input type="hidden" name="board_id" value="<%= comment.board_id %>">
 
       <div class="form-group">
         <label for="comment">수정할 답변</label>
