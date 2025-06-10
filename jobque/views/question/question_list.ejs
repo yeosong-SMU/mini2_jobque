@@ -54,7 +54,7 @@
               <td>
                 <% if (session.users_id === q.users_id) { %>
                   <div class="action-buttons">
-                    <button class="edit-btn" onclick="location.href='/jobque/question/form/<%= q.id %>'">수정</button>
+                    <button class="edit-btn" onclick="location.href='/jobque/question/edit/<%= q.id %>'">수정</button>
                     <form action="/jobque/question/delete/<%= q.id %>" method="POST" class="delete-form">
                       <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
                     </form>
