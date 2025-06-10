@@ -10,22 +10,24 @@
 
   <main class="answer-list" style="max-width: 800px; margin: auto;">
     
-
     <!-- 질문 제목 -->
     <br><br>
     <div class="question-header">
       <h2>[<%= question.category %>] <%= question.ques %></h2>
 
-      <% if (session.users_id === question.users_id) { %>
+      <% if (session.users_id == question.users_id) { %>
         <div class="action-buttons" style="margin-top: 12px;">
           <button onclick="location.href='/jobque/question/edit/<%= question.id %>'" class="edit-btn">질문 수정</button>
-
 
           <form action="/jobque/question/delete" method="POST" class="delete-form" onsubmit="return confirm('정말 삭제할까요?')">
             <input type="hidden" name="board_id" value="<%= question.id %>">
             <button type="submit" class="delete-btn">질문 삭제</button>
           </form>
         </div>
+      <% } else { %>
+        <p style="margin-top: 12px; color: #888; font-size: 0.95rem;">
+          이 질문은 기본 제공 질문입니다. 수정이나 삭제할 수 없습니다.
+        </p>
       <% } %>
     </div>
 
@@ -43,8 +45,6 @@
               <div class="action-buttons">
                 <!-- 수정 버튼: answer_edit 페이지로 이동 -->
                 <form action="/jobque/answer/edit/<%= question.id %>/<%= c.id %>" method="GET" style="display: inline;">
-                <form>
-
                   <input type="hidden" name="comment_id" value="<%= c.id %>">
                   <input type="hidden" name="board_id" value="<%= question.id %>">
                   <button type="submit" class="edit-btn">수정</button>
