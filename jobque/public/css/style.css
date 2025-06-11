@@ -691,3 +691,25 @@ textarea {
 .btn-secondary:hover {
   background-color: #5a6268;
 }
+
+/* 관리 열 너비 고정 */
+.question-table th.col-action,
+.question-table td:nth-child(5) {
+  width: 120px; /* 적당히 조정, 예: 100~140px */
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 버튼 그룹 정렬 */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 6px; /* 버튼 사이 간격 */
+}
+
+/* 버튼 크기 조정 (선택) */
+.edit-btn,
+.delete-btn {
+  padding: 4px 8px;
+  font-size: 13px;
+}
