@@ -699,17 +699,3 @@ textarea {
   text-align: center;
   white-space: nowrap;
 }
-
-/* 버튼 그룹 정렬 */
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 6px; /* 버튼 사이 간격 */
-}
-
-/* 버튼 크기 조정 (선택) */
-.edit-btn,
-.delete-btn {
-  padding: 4px 8px;
-  font-size: 13px;
-}
